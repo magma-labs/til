@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'red_carpet_code_highlighter'
 require 'tilt/redcarpet'
 

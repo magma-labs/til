@@ -1,4 +1,5 @@
-%h1 Estilista Posts
+= content_for :head, auto_discovery_link_tag(:atom, root_path(format: "atom"))
+
 - if params[:q].present?
   %section#search
     %header.page_head

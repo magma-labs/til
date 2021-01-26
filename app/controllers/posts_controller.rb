@@ -1,9 +1,9 @@
-class PostsController < ApplicationController
-  helper MarkdownHelper
+# frozen_string_literal: true
 
-  before_action :set_post, only: [:show, :edit, :update]
-  before_action :require_author, except: [:index, :show, :like, :unlike]
-  before_action :authorize_author, only: [:edit, :update]
+class PostsController < ApplicationController
+  before_action :set_post, only: %i[show edit update]
+  before_action :require_developer, except: %i[index show like unlike]
+  before_action :authorize_developer, only: %i[edit update]
 
   def preview
     render layout: false
@@ -15,28 +15,31 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.author = current_author
+    @post.developer = current_developer
     if @post.save
       path = process_post
-      redirect_to path, notice: display_name(@post) + 'created'
+      redirect_to path, notice: "#{display_name(@post)}created"
     else
       render :new
     end
   end
 
   def index
-    @posts = posts_with_author_and_channel.published_and_ordered.search(params[:q])
+    @posts = posts_with_developer_and_channel.published_and_ordered.search(params[:q])
+
     respond_to do |format|
       format.html
+      format.json { render json: @posts }
+      format.atom
     end
   end
-
 
   def show
     if valid_url?
       respond_to do |format|
-        format.md { response.headers["X-Robots-Tag"] = "noindex" }
         format.html
+        format.md { response.headers['X-Robots-Tag'] = 'noindex' }
+        format.json { render json: @post }
       end
     else
       redirect_to_valid_slug
@@ -51,7 +54,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       @post.publish if params[:published] && !@post.published?
       SocialMessaging::TwitterStatus.new(@post).post_to_twitter
-      redirect_to @post, notice: display_name(@post) + 'updated'
+      redirect_to @post, notice: "#{display_name(@post)}updated"
     else
       render :edit
     end
@@ -63,7 +66,7 @@ class PostsController < ApplicationController
   helper_method :sorted_channels
 
   def like
-    post = Post.find_by_slug(params[:slug])
+    post = Post.find_by(slug: params[:slug])
     respond_to do |format|
       if post.increment_likes
         format.json { render json: { likes: post.likes } }
@@ -73,7 +76,7 @@ class PostsController < ApplicationController
   end
 
   def unlike
-    post = Post.find_by_slug(params[:slug])
+    post = Post.find_by(slug: params[:slug])
     respond_to do |format|
       if post.decrement_likes
         format.json { render json: { likes: post.likes } }
@@ -83,11 +86,9 @@ class PostsController < ApplicationController
   end
 
   def drafts
-    @posts = posts_with_author_and_channel.drafts
+    @posts = posts_with_developer_and_channel.drafts
 
-    unless current_author.admin?
-      @posts = @posts.where(author: current_author)
-    end
+    @posts = @posts.where(developer: current_developer) unless current_developer.admin?
 
     render :index
   end
@@ -104,8 +105,8 @@ class PostsController < ApplicationController
     end
   end
 
-  def posts_with_author_and_channel
-    Post.includes(:author, :channel).page(params[:page]).per(50)
+  def posts_with_developer_and_channel
+    Post.includes(:developer, :channel).page(params[:page]).per(50)
   end
 
   def redirect_to_valid_slug
@@ -124,13 +125,11 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.includes(:author).find_by_slug!(untitled_slug)
+    @post = Post.includes(:developer).find_by!(slug: untitled_slug)
   end
 
-  def authorize_author
-    unless editable?(@post)
-      redirect_to root_path, alert: 'You can only edit your own posts'
-    end
+  def authorize_developer
+    redirect_to root_path, alert: 'You can only edit your own posts' unless editable?(@post)
   end
 
   def valid_url?

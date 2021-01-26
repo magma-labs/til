@@ -1,28 +1,30 @@
-class Post < ActiveRecord::Base
-  validates :body, :channel_id, :author, presence: true
+# frozen_string_literal: true
+
+class Post < ApplicationRecord
+  validates :body, :channel_id, :developer, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
   validates :slug, uniqueness: true
   validate :body_size, if: -> { body.present? }
 
   delegate :name, to: :channel, prefix: true
-  delegate :twitter_handle, to: :author, prefix: true
-  delegate :username, to: :author, prefix: true
-  delegate :slack_display_name, to: :author, prefix: true
+  delegate :twitter_handle, to: :developer, prefix: true
+  delegate :username, to: :developer, prefix: true
+  delegate :slack_display_name, to: :developer, prefix: true
 
-  belongs_to :author
+  belongs_to :developer
   belongs_to :channel
 
   before_create :generate_slug
   after_save :notify_slack_on_publication, if: :publishing?
 
-  scope :published, -> { where('published_at is not null') }
-  scope :drafts, -> { where('published_at is null') }
+  scope :drafts, -> { where(published_at: nil) }
+  scope :popular, -> { published.where('likes >= 5') }
+  scope :published, -> { where.not(published_at: nil) }
   scope :published_and_ordered, -> { published.order(published_at: :desc) }
-  scope :published_and_untweeted, -> { published.where('tweeted is false') }
 
   MAX_TITLE_CHARS = 50
-  MAX_WORDS = 1200
+  MAX_WORDS = 200
 
   def published?
     published_at?
@@ -33,15 +35,15 @@ class Post < ActiveRecord::Base
   end
 
   def twitter_handle
-    author_twitter_handle || ENV['default_twitter_handle']
+    developer_twitter_handle || ENV['default_twitter_handle']
   end
 
   def to_param
-    slug + '-' + slugified_title
+    "#{slug}-#{slugified_title}"
   end
 
   def increment_likes
-    self.max_likes += 1 if self.max_likes == self.likes
+    self.max_likes += 1 if max_likes == likes
     self.likes += 1
     notify_slack_on_likes_threshold if likes_threshold?
     save
@@ -49,6 +51,7 @@ class Post < ActiveRecord::Base
 
   def decrement_likes
     return if self.likes.zero?
+
     self.likes -= 1
     save
   end
@@ -62,7 +65,7 @@ class Post < ActiveRecord::Base
   end
 
   def publish
-    update(published_at: Time.now)
+    update(published_at: Time.zone.now)
   end
 
   def publishable?
@@ -76,7 +79,7 @@ class Post < ActiveRecord::Base
   private
 
   def likes_threshold?
-    max_likes % 10 == 0 && max_likes_changed?
+    (max_likes % 10).zero? && max_likes_changed?
   end
 
   def publishing?
@@ -84,7 +87,7 @@ class Post < ActiveRecord::Base
   end
 
   def word_count
-    body.split(' ').size
+    body.split.size
   end
 
   def words_remaining
@@ -95,9 +98,9 @@ class Post < ActiveRecord::Base
     return if word_count <= MAX_WORDS
 
     words_remaining_abs = words_remaining.abs
-    errors.add :body, "of this post is too long. It is "\
+    errors.add :body, 'of this post is too long. It is '\
       "#{words_remaining_abs} #{'word'.pluralize(words_remaining_abs)} "\
-      "over the limit of 200 words"
+      'over the limit of 200 words'
   end
 
   def generate_slug
@@ -109,29 +112,29 @@ class Post < ActiveRecord::Base
   end
 
   def notify_slack(event)
-    SlackNotifier.new.async.perform(self, event)
+    SlackNotifier.new.perform(self, event)
   end
 
   def self.search(query)
     if query.present?
       haystack = {
-        'posts.title'         => 'A',
-        'authors.username' => 'B',
-        'channels.name'       => 'B',
-        'posts.body'          => 'C'
+          'posts.title' => 'A',
+          'developers.username' => 'B',
+          'channels.name' => 'B',
+          'posts.body' => 'C'
       }.map do |column, rank|
         "setweight(to_tsvector('english', #{column}), '#{rank}')"
       end.join(' || ')
 
-      joins(:author, :channel)
-      .joins("""
+      joins(:developer, :channel)
+          .joins(''"
         join lateral (
           select
             ts_rank_cd(#{haystack}, plainto_tsquery('english', #{connection.quote(query)})) as rank
         ) ranks on true
-      """)
-      .where('ranks.rank > 0')
-      .order('ranks.rank desc, posts.created_at desc')
+      "'')
+          .where('ranks.rank > 0')
+          .order('ranks.rank desc, posts.created_at desc')
     else
       order created_at: :desc
     end
