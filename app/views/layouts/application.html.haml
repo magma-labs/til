@@ -1,46 +1,23 @@
 !!! 5
 %html(lang="en-US")
-  %head
-    %title Estilista TIL Server by Obie Fernandez
-
-    = csrf_meta_tags
-
-    %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1")
-
-    %link(href='//fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css')
-    %link(href='//fonts.googleapis.com/css?family=Lora:400,700italic,700,400italic' rel='stylesheet' type='text/css')
-
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-
-    =# favicon_link_tag 'favicon.png'
-
-    = yield :head
-
-    %meta(name="twitter:card" content="summary_large_image")
-    %meta(name="twitter:site" content="@hashrockettil")
-    %meta(name="twitter:creator" content="@obie")
-    %meta(name="twitter:title" content="Today I Learned: a Hashrocket Project")
-    %meta(name="twitter:description" content="TIL is an open-source project by Hashrocket that exists to catalogue the sharing & accumulation of knowledge as it happens day-to-day.")
-    %meta(name="twitter:image" content="https://til.hashrocket.com/assets/til_twittercard.png")
-
-    = yield :canonical
+  = render "layouts/head"
 
   %body
-    %nav.admin_panel
-      %ul
-        - if current_user
-          %li= link_to current_user.email, current_user
-          %li= link_to "Sign Out", logout_path
+    - if developer_signed_in?
+      %nav.admin_panel
+        %ul
+          %li= link_to current_developer.username, current_developer
+          %li= link_to "Log Out", destroy_developer_session_path, method: :delete
           %li= link_to "Create Post", new_post_path
           %li= link_to "Drafts", drafts_path
           %li= link_to "Profile", edit_profile_path
-        - else
-          %li= link_to "Login", login_path
-
 
     %header.site_head
       %div
-        %h1= link_to "TIL", root_path
+        %h1= link_to SITE_NAME, root_path
+        %div.magma
+          %span.by By
+          = link_to image_tag('magma-logo.svg'), "https://magmalabs.io", title: 'Magma Labs home', class: "ml"
 
     = render 'shared/flash'
 
@@ -48,13 +25,28 @@
 
     %nav.site_nav
       %ul
+        %li.site_nav__login
+          - if current_developer
+            = link_to 'Log out', destroy_developer_session_path, method: :delete, class: 'site_nav__link site_nav__logout'
+          - else
+            = link_to 'login', new_developer_session_path, class: 'site_nav__link'
+
         %li.site_nav__about
           = link_to "?", "#", class: "site_nav__link"
           .site_nav__toggle
             .copy
-              TIL about tbd
+              :markdown
+                TIL is an open-source project by
+                [MagmaLabs](https://magmalabs.io) that exists to catalogue
+                the sharing & accumulation of knowledge as it happens
+                day-to-day. Posts have a 200-word limit, and posting is open to
+                any MagmaLaber as well as selected friends of MagmaLabs. We
+                hope you enjoy learning along with us.
               %ul.social
-                %li= link_to "/hashrockettil", "https://twitter.com/hashrockettil", class: "social_twitter"
+                %li= link_to "/wearemagmalabs", "https://twitter.com/wearemagmalabs", class: "social_twitter", target: '_blank'
+
+        %li.site_nav__statistics
+          = link_to "statistics", statistics_path, class: "site_nav__link"
 
         %li.site_nav__search
           = link_to "search", "#", class: "site_nav__link"
@@ -62,3 +54,6 @@
             = form_tag root_path, method: 'get' do
               = search_field_tag :q
               = button_tag 'Search', name: nil
+
+        %li.site_nav__twitter
+          = link_to "Twitter", "https://twitter.com/wearemagmalabs", class: "site_nav__link", target: '_blank'

@@ -1,24 +1,54 @@
-# README
+# Magma-TIL
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[Staging](https://github.com/magma-labs/til/pull/1) 
 
-Things you may want to cover:
+### Install
+Follow these setup steps:
 
-* Ruby version
+```sh
+$ git clone https://github.com/magma-labs/hr-til
+$ cd hr-til
+$ gem install bundler
+$ bundle install
+$ cp config/application.yml{.example,}
+$ rake db:create db:migrate db:seed
+$ rails s
+```
 
-* System dependencies
+In development, `db:seed` will load sample data for channels, developers, and
+posts. Omit this command to opt-out of this step, or create your own sample
+data in `db/seeds/development.rb`.
 
-* Configuration
+To allow users from a domain, multiple domains, or a
+specific email to log in, set those configurations in your environmental
+variables:
 
-* Database creation
+```yml
+# config/application.yml
 
-* Database initialization
+permitted_domains: 'magmalabs.io'
+```
 
-* How to run the test suite
+### Testing
 
-* Services (job queues, cache servers, search engines, etc.)
+Run all tests with:
 
-* Deployment instructions
+```
+$ rake
+```
+Note: test suite has not been refactored 
 
-* ...
+### Dependencies
+
+- The gem `selenium-webdriver` depends on the Firefox browser.
+
+### Environmental Variables
+
+# Not implemented for magma:
+`slack_post_endpoint` allows the app to post to [Slack](https://slack.com/):
+
+```yml
+# config/application.yml
+
+slack_post_endpoint: /services/some/hashes
+```

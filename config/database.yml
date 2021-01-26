@@ -1,16 +1,29 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
 
 development:
   <<: *default
-  database: estilista_development
+  database: hr-til_development
 
-test:
+test: &test
   <<: *default
-  database: estilista_test
+  database: hr-til_test<%=ENV['TEST_ENV_NUMBER']%>
+
+cucumber:
+  <<: *test
+
+staging:
+  <<: *default
+  database: hr-til_development
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  database: hr-til_development
+
+cucumber:
+  <<: *test
+
+cucumber:
+  <<: *test
