@@ -1,6 +1,6 @@
 # Magma-TIL
 
-[Staging](https://github.com/magma-labs/til/pull/1) 
+[Staging](https://ancient-island-39702.herokuapp.com/) 
 
 ### Install
 Follow these setup steps:
