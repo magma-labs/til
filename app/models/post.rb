@@ -43,6 +43,8 @@ class Post < ApplicationRecord
   end
 
   def increment_likes
+    return if current_developer == post.developer
+
     self.max_likes += 1 if max_likes == likes
     self.likes += 1
     notify_slack_on_likes_threshold if likes_threshold?
@@ -50,6 +52,7 @@ class Post < ApplicationRecord
   end
 
   def decrement_likes
+    return if current_developer == post.developer
     return if self.likes.zero?
 
     self.likes -= 1

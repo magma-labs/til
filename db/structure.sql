@@ -77,11 +77,15 @@ CREATE TABLE public.developers (
     reset_password_token character varying,
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
+    confirmation_token character varying,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
+    unconfirmed_email character varying,
     username character varying NOT NULL,
+    admin boolean DEFAULT false NOT NULL,
+    twitter_handle character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    twitter_handle character varying,
-    admin boolean DEFAULT false NOT NULL,
     editor character varying DEFAULT 'Text Field'::character varying,
     slack_name character varying
 );
@@ -285,6 +289,13 @@ ALTER TABLE ONLY public.schema_migrations
 
 ALTER TABLE ONLY public.posts
     ADD CONSTRAINT unique_slug UNIQUE (slug);
+
+
+--
+-- Name: index_developers_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_developers_on_confirmation_token ON public.developers USING btree (confirmation_token);
 
 
 --
