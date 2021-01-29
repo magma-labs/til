@@ -1,6 +1,6 @@
 # Magma-TIL
 
-[Staging](https://ancient-island-39702.herokuapp.com/) 
+[Staging](https://magma-til.herokuapp.com/) 
 
 ### Install
 Follow these setup steps:
