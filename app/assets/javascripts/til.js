@@ -14,4 +14,7 @@ $(function(){
 
   $('.post').syntaxLabel();
 
+  setTimeout(function () {
+      $('#flash').remove();
+    }, 3000);
 });

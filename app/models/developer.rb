@@ -7,7 +7,7 @@ class Developer < ApplicationRecord
   before_create :set_username
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable
 
   has_many :posts
 
