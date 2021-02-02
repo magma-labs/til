@@ -83,7 +83,10 @@ CREATE TABLE public.developers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     editor character varying DEFAULT 'Text Field'::character varying,
-    slack_name character varying
+    slack_name character varying,
+    confirmation_token character varying,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone
 );
 
 
@@ -288,6 +291,13 @@ ALTER TABLE ONLY public.posts
 
 
 --
+-- Name: index_developers_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_developers_on_confirmation_token ON public.developers USING btree (confirmation_token);
+
+
+--
 -- Name: index_developers_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -365,6 +375,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160622152349'),
 ('20160622154534'),
 ('20160701161129'),
-('20160708201736');
+('20160708201736'),
+('20210202151545');
 
 

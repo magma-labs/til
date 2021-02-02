@@ -7,7 +7,7 @@ class Developer < ApplicationRecord
   before_create :set_username
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :posts
 
@@ -49,6 +49,6 @@ class Developer < ApplicationRecord
   end
 
   def set_username
-    self.username = email[/^[^@]+/].tr('.', '')
+    self.username = email[/^[^@]+/].tr('.', '_')
   end
 end
