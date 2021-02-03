@@ -173,15 +173,10 @@ header.site_head
       +mobile
         font-size: .9em
     a.social_twitter
-      background-image: svg-url(twitter, $accent)
+      background-image: svg-url(twitter, $base)
       &:hover
         background-image: svg-url(twitter, $twitter-color)
         color: #55acee
-    a.social_github
-      background-image: svg-url(github, $accent)
-      &:hover
-        background-image: svg-url(github, $github-color)
-        color: #4b4b4b
 
 .site_nav__search
   position: relative
@@ -254,7 +249,7 @@ header.page_head
   h1
     +responsive(font-size, 3rem, 2rem)
     margin-bottom: 1em
-    color: $navy
+    color: $accent
 
   a.author_twitter
     +hide-text

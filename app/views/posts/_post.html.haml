@@ -9,7 +9,6 @@
         %p
           = link_to post.developer_username, post.developer
           %br
-          = link_to post.display_date.strftime("%B %-e, %Y"), post, class: "post__permalink"
           - unless post.published?
             (draft)
     %aside

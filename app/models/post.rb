@@ -17,6 +17,7 @@ class Post < ApplicationRecord
 
   before_create :generate_slug
   after_save :notify_slack_on_publication, if: :publishing?
+  before_action :prevent_self_like, only: %i[increment_likes decrement_likes]
 
   scope :drafts, -> { where(published_at: nil) }
   scope :popular, -> { published.where('likes >= 5') }
@@ -77,6 +78,10 @@ class Post < ApplicationRecord
   end
 
   private
+
+  def prevent_self_like
+    return if current_developer == post.developer
+  end
 
   def likes_threshold?
     (max_likes % 10).zero? && max_likes_changed?

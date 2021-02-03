@@ -15,7 +15,6 @@
 //= require jquery_ujs
 //= require jquery.autosize
 //
-//= require google_analytics
 //= require twitter_button
 //
 //= require autorefresh

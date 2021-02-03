@@ -7,12 +7,15 @@ class Developer < ApplicationRecord
   before_create :set_username
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :posts
-  validates :email, presence: true, format: { with: proc {
-                                                      /\A(.+@(#{ENV['permitted_domains']}))\z/
-                                                    } }
+
+  validates :email,
+            presence: true,
+            format: { with: /\A(.+@(#{ENV['permitted_domains']}))\z/,
+                      message: 'must be from Magma' }
+
   validates :twitter_handle, length: { maximum: 15 },
                              format: { with: /\A(?=.*[a-z])[a-z_\d]+\Z/i }, allow_blank: true
 
@@ -46,6 +49,6 @@ class Developer < ApplicationRecord
   end
 
   def set_username
-    self.username = email[/^[^@]+/]
+    self.username = email[/^[^@]+/].tr('.', '_')
   end
 end

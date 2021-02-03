@@ -1,12 +1,9 @@
 development: &default
   default_twitter_handle: 'magmalabs'
-  google_client_id:
-  google_client_secret:
-  heroku_production_app_name:
+  production_app_name:
   host: 'www.example.com'
   protocol: 'http://'
   permitted_domains: 'magmalabs.io'
-  permitted_emails: ''
   slack_post_endpoint:
   twitter_access_token:
   twitter_access_token_secret:
@@ -16,3 +13,19 @@ development: &default
 
 test:
   <<: *default
+
+production:
+  default_twitter_handle: 'magmalabs'
+  production_app_name: 'magma-til'
+  host: 'magma-til.herokuapp.com'
+  protocol: 'https://'
+  permitted_domains: 'magmalabs.io'
+  slack_post_endpoint:
+  twitter_access_token:
+  twitter_access_token_secret:
+  twitter_consumer_key:
+  twitter_consumer_secret:
+  update_twitter_with_post: "false"
+  SENDMAIL_USERNAME: 'SOMETHING@heroku.com'
+  SENDMAIL_PASSWORD: 'heroku sendmail password'
+  MAILER_DOMAIN: 'heroku.com'
