@@ -64,11 +64,10 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: ENV['host'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      user_name: ENV['SENDMAIL_USERNAME'],
-      password: ENV['SENDMAIL_PASSWORD'],
-      domain: ENV['MAILER_DOMAIN'],
+      user_name: 'apikey',
+      password: ENV['SENDGRID_API_KEY'],
       address: 'smtp.sendgrid.net',
-      port: '587',
+      port: '465',
       authentication: :plain,
       enable_starttls_auto: true
   }
