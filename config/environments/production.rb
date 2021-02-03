@@ -67,7 +67,7 @@ Rails.application.configure do
       user_name: ENV['SENDMAIL_USERNAME'],
       password: ENV['SENDMAIL_PASSWORD'],
       domain: ENV['MAILER_DOMAIN'],
-      address: 'smtp.gmail.com',
+      address: 'smtp.sendgrid.net',
       port: '587',
       authentication: :plain,
       enable_starttls_auto: true
