@@ -31,14 +31,13 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: ENV['MAIL_HOST'] }
+  config.action_mailer.default_options = { from: ENV['sender_email'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      user_name: ENV['SENDMAIL_USERNAME'],
-      password: ENV['SENDMAIL_PASSWORD'],
-      domain: ENV['MAIL_HOST'],
-      address: 'smtp.gmail.com',
-      port: '587',
+      user_name: 'apikey',
+      password: ENV['SENDGRID_API_KEY'],
+      address: 'smtp.sendgrid.net',
+      port: '2525',
       authentication: :plain,
       enable_starttls_auto: true
   }
