@@ -26,6 +26,6 @@ production:
   twitter_consumer_key:
   twitter_consumer_secret:
   update_twitter_with_post: "false"
-  SENDMAIL_USERNAME: ''
-  SENDMAIL_PASSWORD: ''
-  MAIL_HOST: 'heroku.com'
+  SENDMAIL_USERNAME: 'SOMETHING@heroku.com'
+  SENDMAIL_PASSWORD: 'heroku sendmail password'
+  MAILER_DOMAIN: 'heroku.com'
