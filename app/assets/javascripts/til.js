@@ -14,7 +14,6 @@ $(function(){
   });
 
   $(document.body).on('click', function (e) {
-    e.preventDefault();
     var $about = $('.site_nav__about')
     var _opened = $about.hasClass('site_nav--open');
     if (_opened === true) {
@@ -24,7 +23,6 @@ $(function(){
   });
 
   $(document.body).on('click', function (e) {
-    e.preventDefault();
     var $search = $('.site_nav__search');
     var _opened = $search.hasClass('site_nav--open');
     if (_opened === true) {
