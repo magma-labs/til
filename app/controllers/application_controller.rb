@@ -5,11 +5,16 @@ class ApplicationController < ActionController::Base
   before_action :set_cache_header
 
   helper_method :editable?
+  helper_method :likeable?
 
   private
 
   def editable?(post)
     current_developer && (current_developer == post.developer || current_developer.admin?)
+  end
+
+  def likeable?(post)
+    current_developer && (current_developer != post.developer)
   end
 
   def require_developer
