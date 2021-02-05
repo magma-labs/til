@@ -1,6 +1,8 @@
 development: &default
   default_twitter_handle: 'magmalabs'
   production_app_name:
+  google_client_id: 
+  google_client_secret: 
   host: 'www.example.com'
   protocol: 'http://'
   permitted_domains: 'magmalabs.io'
@@ -17,6 +19,8 @@ test:
 production:
   default_twitter_handle: 'magmalabs'
   production_app_name: 'magma-til'
+  google_client_id: 
+  google_client_secret: 
   host: 'magma-til.herokuapp.com'
   protocol: 'https://'
   permitted_domains: 'magmalabs.io'
