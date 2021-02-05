@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update]
   before_action :require_developer, except: %i[index show like unlike]
   before_action :authorize_developer, only: %i[edit update]
-  before_action :prevent_self_like, only: %i[like unlike]
 
   def preview
     render layout: false
@@ -68,6 +67,8 @@ class PostsController < ApplicationController
 
   def like
     post = Post.find_by(slug: params[:slug])
+    return unless current_developer && (current_developer != post.developer)
+
     respond_to do |format|
       if post.increment_likes
         format.json { render json: { likes: post.likes } }
@@ -95,10 +96,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def prevent_self_like
-    return if current_developer && current_developer == post.developer
-  end
 
   def process_post
     if params[:published]
