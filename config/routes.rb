@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :developers
   default_url_options host: ENV.fetch('host'), protocol: ENV.fetch('protocol')
 
   unless Rails.env.production?

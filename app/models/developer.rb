@@ -1,15 +1,9 @@
 # frozen_string_literal: true
 
 class Developer < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-
   before_create :set_username
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
-
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   validates :email,
             presence: true,

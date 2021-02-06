@@ -73,20 +73,13 @@ ALTER SEQUENCE public.channels_id_seq OWNED BY public.channels.id;
 CREATE TABLE public.developers (
     id integer NOT NULL,
     email character varying DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
-    reset_password_token character varying,
-    reset_password_sent_at timestamp without time zone,
-    remember_created_at timestamp without time zone,
     username character varying NOT NULL,
     admin boolean DEFAULT false NOT NULL,
     twitter_handle character varying,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     editor character varying DEFAULT 'Text Field'::character varying,
-    slack_name character varying,
-    confirmation_token character varying,
-    confirmed_at timestamp without time zone,
-    confirmation_sent_at timestamp without time zone
+    slack_name character varying
 );
 
 
@@ -291,24 +284,10 @@ ALTER TABLE ONLY public.posts
 
 
 --
--- Name: index_developers_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_developers_on_confirmation_token ON public.developers USING btree (confirmation_token);
-
-
---
 -- Name: index_developers_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_developers_on_email ON public.developers USING btree (email);
-
-
---
--- Name: index_developers_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX index_developers_on_reset_password_token ON public.developers USING btree (reset_password_token);
 
 
 --
@@ -376,6 +355,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160622154534'),
 ('20160701161129'),
 ('20160708201736'),
-('20210202151545');
+('20210202151545'),
+('20210206213709');
 
 
