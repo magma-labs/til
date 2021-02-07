@@ -12,6 +12,12 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/auth/google_oauth2/callback' => 'sessions#create'
+  get '/login' => 'sessions#new', :as => :login
+  get '/logout' => 'sessions#destroy', :as => :logout
+
+  resource :session, only: %i[create destroy]
+
   root to: 'posts#index'
 
   resource :profile, controller: 'developers', only: %i[update edit]

@@ -4,10 +4,21 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_cache_header
 
-  helper_method :editable?
-  helper_method :likeable?
+  helper_method :editable?, :likeable?, :logged_in?, :current_developer
 
   private
+
+  def logged_in?
+    current_developer != nil
+  end
+
+  def current_developer
+    if session[:developer_id]
+      @current_developer ||= User.find(session[:developer_id])
+    else
+      @current_developer = nil
+    end
+  end
 
   def editable?(post)
     current_developer && (current_developer == post.developer || current_developer.admin?)
