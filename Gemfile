@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.6'
+ruby '2.4.10'
 
 gem 'rails', '~> 5.x'
 
@@ -15,6 +15,7 @@ gem 'httparty'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'pg'
 gem 'puma'
