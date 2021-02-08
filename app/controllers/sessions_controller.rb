@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
   def create
     developer_info = request.env['omniauth.auth']
 
-    developer = Developer.find_or_create_by!(email: developer_info['info']['email']) do |new_developer|
-      new_developer.fullname = developer_info['info']['name']
+    developer = Developer.find_or_create_by!(email: developer_info['info']['email']) do |dev|
+      dev.username = developer_info['info']['name']
     end
     reset_session
     session[:developer_email] = developer.email

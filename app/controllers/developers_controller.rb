@@ -19,7 +19,7 @@ class DevelopersController < ApplicationController
 
   def developer
     @developer ||= if params[:action] == 'show'
-                     Developer.find_by(username: params[:id])
+                     Developer.find(params[:id])
                    else
                      current_developer
                    end

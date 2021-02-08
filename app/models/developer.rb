@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Developer < ApplicationRecord
-  before_create :set_username
-
   has_many :posts, dependent: :destroy
 
   validates :twitter_handle, length: { maximum: 15 },
@@ -16,10 +14,6 @@ class Developer < ApplicationRecord
       in: editor_options,
       message: '%<value> is not a valid editor'
   }
-
-  def to_param
-    username
-  end
 
   def twitter_handle=(handle)
     self[:twitter_handle] = handle.gsub(/^@+/, '').presence
@@ -35,9 +29,5 @@ class Developer < ApplicationRecord
 
   def slack_display_name
     slack_name || username
-  end
-
-  def set_username
-    self.username = email[/^[^@]+/].tr('.', '_')
   end
 end
