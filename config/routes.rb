@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   default_url_options host: ENV.fetch('host'), protocol: ENV.fetch('protocol')
 
   get '/auth/:provider/callback' => 'sessions#create'
-  get 'signin', to: redirect('/auth/google_oauth2'), as: 'signin'
-  get '/signout' => 'sessions#destroy', :as => :signout
+  delete '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
 
   root to: 'posts#index'

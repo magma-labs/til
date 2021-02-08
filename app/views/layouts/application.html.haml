@@ -29,7 +29,7 @@
           - if current_developer
             = link_to 'Log out', signout_path, method: :delete, class: 'site_nav__link site_nav__logout'
           - else
-            = link_to 'Log in', signin_path, class: 'site_nav__link'
+            = link_to 'Log in', new_post_path, class: 'site_nav__link'
 
         %li.site_nav__about
           = link_to "?", "#", class: "site_nav__link"
