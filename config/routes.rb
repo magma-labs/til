@@ -3,20 +3,10 @@
 Rails.application.routes.draw do
   default_url_options host: ENV.fetch('host'), protocol: ENV.fetch('protocol')
 
-  unless Rails.env.production?
-    namespace 'ui' do
-      get '/', action: 'index'
-      %w[author_index drafts home post_edit post_show statistics tag_index].each do |action|
-        get action, action: action
-      end
-    end
-  end
-
-  get '/auth/google_oauth2/callback' => 'sessions#create'
-  get '/login' => 'sessions#new', :as => :login
-  get '/logout' => 'sessions#destroy', :as => :logout
-
-  resource :session, only: %i[create destroy]
+  get '/auth/:provider/callback' => 'sessions#create'
+  get 'signin', to: redirect('/auth/google_oauth2'), as: 'signin'
+  get '/signout' => 'sessions#destroy', :as => :signout
+  get '/auth/failure' => 'sessions#failure'
 
   root to: 'posts#index'
 

@@ -7,7 +7,7 @@
       %nav.admin_panel
         %ul
           %li= link_to current_developer.username, current_developer
-          %li= link_to "Log Out", logout_path, method: :delete
+          %li= link_to "Log Out", signout_path, method: :delete
           %li= link_to "Create Post", new_post_path
           %li= link_to "Drafts", drafts_path
           %li= link_to "Profile", edit_profile_path
@@ -27,9 +27,9 @@
       %ul
         %li.site_nav__login
           - if current_developer
-            = link_to 'Log out', logout_path, method: :delete, class: 'site_nav__link site_nav__logout'
+            = link_to 'Log out', signout_path, method: :delete, class: 'site_nav__link site_nav__logout'
           - else
-            = link_to 'Log in', login_path, class: 'site_nav__link'
+            = link_to 'Log in', signin_path, class: 'site_nav__link'
 
         %li.site_nav__about
           = link_to "?", "#", class: "site_nav__link"

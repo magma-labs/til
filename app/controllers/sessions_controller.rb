@@ -17,4 +17,8 @@ class SessionsController < ApplicationController
     session[:developer_id] = nil
     redirect_to root_url, notice: 'Logged out!'
   end
+
+  def failure
+    redirect_to root_url, alert: "Authentication error: #{params[:message].humanize}"
+  end
 end
