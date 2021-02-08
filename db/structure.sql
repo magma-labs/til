@@ -79,7 +79,8 @@ CREATE TABLE public.developers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     editor character varying DEFAULT 'Text Field'::character varying,
-    slack_name character varying
+    slack_name character varying,
+    fullname character varying
 );
 
 
@@ -356,6 +357,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160701161129'),
 ('20160708201736'),
 ('20210202151545'),
-('20210206213709');
+('20210206213709'),
+('20210208172317');
 
 
