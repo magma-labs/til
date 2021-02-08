@@ -32,9 +32,7 @@ print 'Creating developers'
 5.times do
   username = Faker::Movies::VForVendetta.unique.character.downcase.delete(' ')
   Developer.create!(username: username,
-                    email: "#{username}@magmalabs.io",
-                    password: 'foobar123',
-                    confirmed_at: Time.current)
+                    email: "#{username}@magmalabs.io")
 end
 puts ' ...done.'
 
