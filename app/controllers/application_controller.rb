@@ -13,15 +13,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_developer
-    if session[:developer_id]
-      @current_developer ||= User.find(session[:developer_id])
-    else
-      @current_developer = nil
-    end
+    @current_developer ||= session[:developer_id] && Developer.find(session[:developer_id])
   end
 
   def editable?(post)
-    current_developer && (current_developer == post.developer || current_developer.admin?)
+    current_developer && (current_developer == post.developer)
   end
 
   def likeable?(post)
@@ -29,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_developer
-    redirect_to root_path unless current_developer
+    redirect_to '/auth/google_oauth2' unless current_developer
   end
 
   def set_cache_header

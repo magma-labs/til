@@ -8,14 +8,17 @@ class SessionsController < ApplicationController
   def create
     developer_info = request.env['omniauth.auth']
 
-    developer = Developer.find_or_create_by!(email: developer_info['info']['email'])
+    developer = Developer.find_or_create_by!(email: developer_info['info']['email']) do |new_developer|
+      new_developer.fullname = developer_info['info']['name']
+    end
+    reset_session
     session[:developer_id] = developer.id
     redirect_to root_path, notice: "Welcome #{developer_info['info']['name']}!"
   end
 
   def destroy
-    session[:developer_id] = nil
-    redirect_to root_url, notice: 'Logged out!'
+    reset_session
+    redirect_to root_url, notice: 'Signed out!'
   end
 
   def failure
