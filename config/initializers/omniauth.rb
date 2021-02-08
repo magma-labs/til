@@ -1,7 +1,13 @@
 # frozen_string_literal:true
 
+OmniAuth.config.logger = Rails.logger
+
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :google_oauth2, ENV['google_client_id'], ENV['google_client_secret']
+  provider :developer
+  provider :google_oauth2,
+           ENV['google_client_id'],
+           ENV['google_client_secret'],
+           { scope: 'email', hd: 'magmalabs.io' }
 end
 
-OmniAuth.config.full_host = "#{ENV['protocol']}#{ENV['host']}"
+OmniAuth.config.allowed_request_methods = %i[post get]
