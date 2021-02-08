@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       new_developer.fullname = developer_info['info']['name']
     end
     reset_session
-    session[:developer_id] = developer.id
+    session[:developer_email] = developer.email
     redirect_to root_path, notice: "Welcome #{developer_info['info']['name']}!"
   end
 

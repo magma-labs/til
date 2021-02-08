@@ -13,7 +13,8 @@ class ApplicationController < ActionController::Base
   end
 
   def current_developer
-    @current_developer ||= session[:developer_id] && Developer.find(session[:developer_id])
+    @current_developer ||=
+      session[:developer_email] && Developer.find_by(email: session[:developer_email])
   end
 
   def editable?(post)
