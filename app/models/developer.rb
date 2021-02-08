@@ -5,11 +5,6 @@ class Developer < ApplicationRecord
 
   has_many :posts, dependent: :destroy
 
-  validates :email,
-            presence: true,
-            format: { with: /\A(.+@(#{ENV['permitted_domains']}))\z/,
-                      message: 'must be from Magma' }
-
   validates :twitter_handle, length: { maximum: 15 },
                              format: { with: /\A(?=.*[a-z])[a-z_\d]+\Z/i }, allow_blank: true
 
