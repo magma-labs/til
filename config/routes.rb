@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :developers
   default_url_options host: ENV.fetch('host'), protocol: ENV.fetch('protocol')
 
-  unless Rails.env.production?
-    namespace 'ui' do
-      get '/', action: 'index'
-      %w[author_index drafts home post_edit post_show statistics tag_index].each do |action|
-        get action, action: action
-      end
-    end
-  end
+  get '/auth/:provider/callback' => 'sessions#create'
+  delete '/signout' => 'sessions#destroy', :as => :signout
+  get '/auth/failure' => 'sessions#failure'
 
   root to: 'posts#index'
 

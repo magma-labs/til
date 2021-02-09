@@ -2,20 +2,20 @@
 
 source 'https://rubygems.org'
 
-ruby '2.4.6'
+ruby '2.4.10'
 
 gem 'rails', '~> 5.x'
 
 gem 'active_model_serializers'
 gem 'autoprefixer-rails'
 gem 'coffee-rails', '~> 4.1.0'
-gem 'devise'
 gem 'dynamic_form'
 gem 'haml-rails'
 gem 'httparty'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'omniauth-google-oauth2'
 gem 'pg'
 gem 'puma'
 gem 'rack-cors', require: 'rack/cors'

@@ -1,7 +1,12 @@
 $(function () {
   $(document.body).on('click', '#flash p', function (e) {
     e.preventDefault();
-    $(this).fadeOut(200);
+      $(this).fadeOut(200);
+  });
+
+  $('.js-nolike').on('click',
+    function (e) {
+      e.preventDefault();
   });
 
   $('.site_nav__search, .site_nav__about').on(

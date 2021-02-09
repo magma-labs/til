@@ -26,7 +26,7 @@
             = link_to "edit", [:edit, post], class: "post__edit-link"
         - unless post.draft?
           %li
-            = link_to post_path(post), class: "js-like-action post__like-link", id: post.slug do
+            = link_to post_path(post), :class => (likeable?(post) ? 'js-like-action post__like-link' : 'js-nolike post__like-link'), id: post.slug do
               %span.post__like-count= post.likes
               %span.post__like-label likes
 

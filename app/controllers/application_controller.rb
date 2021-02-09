@@ -4,16 +4,29 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_cache_header
 
-  helper_method :editable?
+  helper_method :editable?, :likeable?, :logged_in?, :current_developer
 
   private
 
+  def logged_in?
+    current_developer != nil
+  end
+
+  def current_developer
+    @current_developer ||=
+      session[:developer_email] && Developer.find_by(email: session[:developer_email])
+  end
+
   def editable?(post)
-    current_developer && (current_developer == post.developer || current_developer.admin?)
+    current_developer && (current_developer == post.developer)
+  end
+
+  def likeable?(post)
+    current_developer && (current_developer != post.developer)
   end
 
   def require_developer
-    redirect_to root_path unless current_developer
+    redirect_to '/auth/google_oauth2' unless current_developer
   end
 
   def set_cache_header
