@@ -65,8 +65,8 @@ nav.pagination
     background-image: linear-gradient(116deg, rgba(36, 36, 36, 0.91) 6%, rgba(43, 43, 43, 0.27) 99%)
     +box-outline
     +mobile
-      max-width: none
-      min-width: 0
+      margin: 0 auto
+      min-width: 80vw
   .post__content
     overflow: auto
     padding: 4vw
@@ -372,7 +372,9 @@ form
   width: 330px
   display: flex
   flex-direction: column
-  padding: 1rem 2rem
+  padding: 1rem
+  +mobile
+    padding: none
   .text-field
     margin: 1rem auto
     input

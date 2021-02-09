@@ -6,6 +6,9 @@ body
     image: asset-url("background.png")
     repeat: no-repeat
     attachment: fixed
+    size: cover
+    position: center
+
   color: $dark
   font-family: $primary-typeface
   font-size: 1.6em
@@ -61,6 +64,7 @@ header.site_head
         margin-bottom: auto
         object-fit: contain
   +mobile
+    display: none
     z-index: 100
     background: #fff
     text-align: right
@@ -77,11 +81,18 @@ header.site_head
   bottom: 0
   left: 0
   z-index: 100
+  +mobile
+    margin: 0 auto
+    width: 100vw
+    flex
   > ul
     +clearfix
     +mobile
-      background: transparentize(#fff, .2)
-      border-top: 2px solid transparentize(#fff, .1)
+      background: #fff
+      border-top: 2px solid #fff,
+      display: flex
+      flex-direction: row
+      justify-content: space-between
     > li
       clear: left
       float: left
@@ -94,6 +105,8 @@ header.site_head
           width: auto
           opacity: 1
           box-shadow: 0 0 3rem transparentize($navy, .8)
+
+
 
 .site_nav__link
   display: inline-block
@@ -123,15 +136,21 @@ header.site_head
 .site_nav__login
   a.site_nav__link
     background-image: svg-url(login, $accent)
+    +mobile
+      background-image: svg-url(login, $navy)
 
 .site_nav__statistics
   a.site_nav__link
     background-image: svg-url(stats, $accent)
+    +mobile
+      background-image: svg-url(stats, $navy)
 
 .site_nav__about
   position: relative
   a.site_nav__link
     background-image: svg-url(help, $accent)
+    +mobile
+      background-image: svg-url(help, $navy)
   .site_nav__toggle
     .copy
       box-sizing: border-box
@@ -182,6 +201,8 @@ header.site_head
   position: relative
   .site_nav__link
     background-image: svg-url(search, $accent)
+    +mobile
+      background-image: svg-url(search, $navy)
   .site_nav__toggle
     background: #fff
     white-space: nowrap
@@ -203,6 +224,8 @@ header.site_head
 .site_nav__twitter
   .site_nav__link
     background-image: svg-url(twitter, $accent)
+    +mobile
+      background-image: svg-url(twitter, $navy)
 
 .admin_panel
   position: fixed
@@ -228,7 +251,7 @@ header.site_head
       color: $blue
       line-height: 1.5rem
       &:hover
-        color: $red
+        color: $navy
   + .site_head
     margin-top: 2.5rem
     + main
