@@ -5,22 +5,22 @@ default: &default
 
 development:
   <<: *default
-  database: hr-til_development
+  database: til_development
 
 test: &test
   <<: *default
-  database: hr-til_test<%=ENV['TEST_ENV_NUMBER']%>
+  database: til_test<%=ENV['TEST_ENV_NUMBER']%>
 
 cucumber:
   <<: *test
 
 staging:
   <<: *default
-  database: hr-til_development
+  database: til_staging
 
 production:
   <<: *default
-  database: hr-til_development
+  database: til_production
 
 cucumber:
   <<: *test
