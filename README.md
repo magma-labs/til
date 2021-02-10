@@ -1,13 +1,13 @@
 # Magma-TIL
-
-[Staging](https://magma-til.herokuapp.com/) 
+The heroku App in Prod Points to [til.magmalabs.io](https://til.magmalabs.io/)
+[Produdction](https://magma-til.herokuapp.com/) 
 
 ### Install
 Follow these setup steps:
 
 ```sh
-$ git clone https://github.com/magma-labs/hr-til
-$ cd hr-til
+$ git clone https://github.com/magma-labs/til
+$ cd til
 $ gem install bundler
 $ bundle install
 $ cp config/application.yml{.example,}
@@ -19,14 +19,10 @@ In development, `db:seed` will load sample data for channels, developers, and
 posts. Omit this command to opt-out of this step, or create your own sample
 data in `db/seeds/development.rb`.
 
-To allow users from a domain, multiple domains, or a
-specific email to log in, set those configurations in your environmental
-variables:
 
 ```yml
-# config/application.yml
+Only accounts with @magmalabs.io emails are allowed
 
-permitted_domains: 'magmalabs.io'
 ```
 
 ### Testing
@@ -38,11 +34,6 @@ $ rake
 ```
 Note: test suite has not been refactored 
 
-### Dependencies
-
-- The gem `selenium-webdriver` depends on the Firefox browser.
-
-### Environmental Variables
 
 # Not implemented for magma:
 `slack_post_endpoint` allows the app to post to [Slack](https://slack.com/):
