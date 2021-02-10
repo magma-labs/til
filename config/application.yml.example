@@ -1,5 +1,5 @@
 development: &default
-  default_twitter_handle: 'magmalabs'
+  default_twitter_handle: 'wearemagmalabs'
   production_app_name:
   google_client_id: ''
   google_client_secret: ''

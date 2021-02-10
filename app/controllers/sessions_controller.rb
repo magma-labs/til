@@ -9,11 +9,11 @@ class SessionsController < ApplicationController
     developer_info = request.env['omniauth.auth']
 
     developer = Developer.find_or_create_by!(email: developer_info['info']['email']) do |dev|
-      dev.username = developer_info['info']['name']
+      dev.username = developer_info['info']['email'].split('@').first.parameterize
     end
     reset_session
     session[:developer_email] = developer.email
-    redirect_to root_path, notice: "Welcome #{developer_info['info']['name']}!"
+    redirect_to root_path, notice: "Welcome #{developer_info.username}!"
   end
 
   def destroy
