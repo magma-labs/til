@@ -12,13 +12,17 @@ channels = [
     { name: 'git', twitter_hashtag: 'git' },
     { name: 'html-css', twitter_hashtag: 'htmlcss' },
     { name: 'javascript', twitter_hashtag: 'javascript' },
+    { name: 'life-pro-tips', twitter_hashtag: 'lpt' },
     { name: 'mobile', twitter_hashtag: 'mobile' },
+    { name: 'productivity', twitter_hashtag: 'productivity' },
+    { name: 'quality-of-life', twitter_hashtag: 'qualityoflife' },
     { name: 'rails', twitter_hashtag: 'rails' },
     { name: 'react', twitter_hashtag: 'react' },
     { name: 'ruby', twitter_hashtag: 'ruby' },
     { name: 'sql', twitter_hashtag: 'sql' },
     { name: 'testing', twitter_hashtag: 'testing' },
     { name: 'vim', twitter_hashtag: 'vim' },
+    { name: 'vue', twitter_hashtag: 'vue' },
     { name: 'workflow', twitter_hashtag: 'workflow' }
 ]
 
