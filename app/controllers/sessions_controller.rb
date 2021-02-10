@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     end
     reset_session
     session[:developer_email] = developer.email
-    redirect_to root_path, notice: "Welcome #{developer_info['info']['name']}!"
+    redirect_to root_path, notice: "Welcome #{developer_info.username}!"
   end
 
   def destroy
