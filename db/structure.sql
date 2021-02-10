@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.20
+-- Dumped from database version 13.1
 -- Dumped by pg_dump version 13.1
 
 SET statement_timeout = 0;
@@ -17,6 +17,8 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
+
+SET default_table_access_method = heap;
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
@@ -49,6 +51,7 @@ CREATE TABLE public.channels (
 --
 
 CREATE SEQUENCE public.channels_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -118,7 +121,7 @@ CREATE VIEW public.hot_posts AS
             posts.likes,
             posts.tweeted,
             posts.published_at,
-            GREATEST((date_part('epoch'::text, (now() - posts.published_at)) / (3600)::double precision), (0.1)::double precision) AS hour_age
+            GREATEST((date_part('epoch'::text, (CURRENT_TIMESTAMP - posts.published_at)) / (3600)::double precision), (0.1)::double precision) AS hour_age
            FROM public.posts
           WHERE (posts.published_at IS NOT NULL)
         )
@@ -167,6 +170,7 @@ CREATE VIEW public.developer_scores AS
 --
 
 CREATE SEQUENCE public.developers_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -186,6 +190,7 @@ ALTER SEQUENCE public.developers_id_seq OWNED BY public.developers.id;
 --
 
 CREATE SEQUENCE public.posts_id_seq
+    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
