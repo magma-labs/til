@@ -1,20 +1,22 @@
-#profile_edit
-  %div.profile
-    %h1 My Profile
-    = form_for developer, url: profile_path do |f|
-      = label_tag :email, "Your email: #{developer.email}"
+%div.profile
+  %h1 My Profile
+  = form_for developer, url: profile_path do |f|
+    = label_tag :email, "My email: #{developer.email}", class: 'email'
 
+    %div.field
       = f.label :slack_name
       = f.text_field :slack_name, placeholder: 'Enter name...'
 
+    %div.field
       = f.label :twitter_handle
       = f.error_message_on :twitter_handle
       = f.text_field :twitter_handle, placeholder: 'Enter handle...'
 
+    %div.field
       = f.label :editor
       = f.error_message_on :editor
       = f.select :editor, options_for_select(Developer.editor_options, selected: developer.editor)
 
-      %div.form_actions
+    %div.form_actions
       = f.submit 'Submit', class: 'submit'
       = link_to 'Cancel', root_path
