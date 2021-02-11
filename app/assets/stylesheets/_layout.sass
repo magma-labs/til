@@ -20,14 +20,14 @@ header
   font-size: 32pt
   letter-spacing: 7pt
   color: #777
-
   a
     display: block
     margin: 0 auto
-
     img
       max-width: 200px
       height: auto
+  +mobile
+    font-size: 28px
 
 .site_nav
   position: fixed
@@ -207,9 +207,6 @@ header
     margin-top: 2.5rem
     + main
       padding-top: 2.5rem
-
-main
-  min-height: 60vh
 
 header.page_head
   text-align: center
