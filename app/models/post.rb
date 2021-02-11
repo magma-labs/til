@@ -2,10 +2,9 @@
 
 class Post < ApplicationRecord
   validates :body, :channel_id, :developer, presence: true
-  validates :title, presence: true, length: { maximum: 50 }
+  validates :title, presence: true
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
   validates :slug, uniqueness: true
-  validate :body_size, if: -> { body.present? }
 
   delegate :name, to: :channel, prefix: true
   delegate :twitter_handle, to: :developer, prefix: true
@@ -22,9 +21,6 @@ class Post < ApplicationRecord
   scope :popular, -> { published.where('likes >= 5') }
   scope :published, -> { where.not(published_at: nil) }
   scope :published_and_ordered, -> { published.order(published_at: :desc) }
-
-  MAX_TITLE_CHARS = 50
-  MAX_WORDS = 200
 
   def published?
     published_at?
@@ -84,23 +80,6 @@ class Post < ApplicationRecord
 
   def publishing?
     published_at? && published_at_changed?
-  end
-
-  def word_count
-    body.split.size
-  end
-
-  def words_remaining
-    MAX_WORDS - word_count
-  end
-
-  def body_size
-    return if word_count <= MAX_WORDS
-
-    words_remaining_abs = words_remaining.abs
-    errors.add :body, 'of this post is too long. It is '\
-      "#{words_remaining_abs} #{'word'.pluralize(words_remaining_abs)} "\
-      'over the limit of 200 words'
   end
 
   def generate_slug
