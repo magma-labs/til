@@ -362,9 +362,23 @@ form
   width: 330px
   display: flex
   flex-direction: column
-  padding: 1rem
-  +mobile
-    padding: none
+  justify-content: space-between
+  height: 375px
+  background-color: $light-bg
+  padding: 1.5rem
+  .edit_developer
+    padding: 1rem 0
+    display: flex
+    height: 100%
+    flex-direction: column
+    justify-content: space-between
+    .field
+      height: 65px
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+    .form_actions
+      margin: 0 auto
   .text-field
     margin: 1rem auto
     input
@@ -374,6 +388,17 @@ form
     background-color: $dark
     &:hover
       background-color: $bg-red
+  +mobile
+    padding: 0
+    width: 80vw
+    height: 45vh
+    h1
+      display: none
+    .edit_developer
+      padding: 0
+      margin: 10px
+      .email
+        display: none
 
 #post_edit
   background-color: $light-bg
@@ -386,6 +411,3 @@ form
     background-color: $dark
     &:hover
       background-color: $bg-red
-
-.edit_developer
-  background-color: $light-bg
