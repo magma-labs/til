@@ -6,7 +6,7 @@
       = find_and_preserve markdown_render post.body
       %p.footer
         Learned by
-        = link_to post.developer_username, post.developer
+        = link_to post.developer_username, developer_path(post.developer_username)
         - unless post.published?
           (draft)
         on

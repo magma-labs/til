@@ -37,7 +37,7 @@ end
 puts ' ...done.'
 
 print 'Creating posts'
-40.times do
+400.times do
   channel = Channel.all.sample
   likes = rand(1..20)
   length = rand(10..50)
