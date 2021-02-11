@@ -1,16 +1,15 @@
-%div.form
+%div.form_container
   = form_for @post do |f|
-    %div
+    .field
       = f.label :title
       = f.error_message_on :title
       = f.text_field :title, placeholder: 'Enter title...'
-
+    .field
       = f.label :body
       = f.error_message_on :body
-
       #editor
       = f.text_area :body, placeholder: 'Enter body...', class: 'autosize'
-
+    .field
       = f.label :channel_id
       = f.error_message_on :channel_id
       = f.collection_select :channel_id, sorted_channels, :id, :name, include_blank: ""
@@ -18,7 +17,7 @@
       %label.checkbox
         = check_box_tag :published, "true", false
         = label_tag :published, 'Publish this post'
-    %fieldset.actions
+    .actions
       = f.submit 'Submit', class: "submit"
       = link_to 'cancel', root_path
 
