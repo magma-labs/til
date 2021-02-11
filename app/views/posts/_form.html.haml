@@ -1,25 +1,23 @@
 %div.form
   = form_for @post do |f|
-    %dl
-      %dt
-        = f.label :title
-        = f.error_message_on :title
-      %dd= f.text_field :title, placeholder: 'Enter title...'
-      %dt
-        = f.label :body
-        = f.error_message_on :body
-      %dd
-        #editor
-        = f.text_area :body, placeholder: 'Enter body...', class: 'autosize'
+    %div
+      = f.label :title
+      = f.error_message_on :title
+      = f.text_field :title, placeholder: 'Enter title...'
 
-      %dt
-        = f.label :channel_id
-        = f.error_message_on :channel_id
-      %dd= f.collection_select :channel_id, sorted_channels, :id, :name, include_blank: ""
-      - if @post.publishable?
-        %label.checkbox
-          = check_box_tag :published, "true", false
-          = label_tag :published, 'Publish this post'
+      = f.label :body
+      = f.error_message_on :body
+
+      #editor
+      = f.text_area :body, placeholder: 'Enter body...', class: 'autosize'
+
+      = f.label :channel_id
+      = f.error_message_on :channel_id
+      = f.collection_select :channel_id, sorted_channels, :id, :name, include_blank: ""
+    - if @post.publishable?
+      %label.checkbox
+        = check_box_tag :published, "true", false
+        = label_tag :published, 'Publish this post'
     %fieldset.actions
       = f.submit 'Submit', class: "submit"
       = link_to 'cancel', root_path
