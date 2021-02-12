@@ -332,31 +332,6 @@ form
   a
     color: $red
 
-.devise_form
-  background-color: $light-bg
-  margin: 0 auto
-  width: 330px
-  display: flex
-  flex-direction: column
-  padding: 1rem 2rem
-  .text-field
-    margin: 1rem auto
-    input
-      box-sizing: border-box
-      width: 100%
-  .submit
-    background-color: $dark
-    &:hover
-      background-color: $bg-red
-  .actions
-    padding-top: 1rem
-
-.devise
-  font: $primary-typeface
-  a
-    color: $bg-red
-    margin-top: 10px
-
 .profile
   margin: 0 auto
   width: 330px
@@ -402,12 +377,18 @@ form
 
 #post_edit
   background-color: $light-bg
-  margin: 0 auto
-  width: 60vw
-  display: flex
-  flex-direction: column
+  margin: 0 auto 7rem
+  width: 900px
+  max-width: 85vw
   padding: 1rem 2rem
+  #new_post
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    min-height: 300px
   .submit
     background-color: $dark
     &:hover
       background-color: $bg-red
+  +mobile
+    padding: 1rem
