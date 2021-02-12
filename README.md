@@ -1,6 +1,6 @@
 # Magma-TIL
 The heroku App in Prod Points to [til.magmalabs.io](https://til.magmalabs.io/)
-[Produdction](https://magma-til.herokuapp.com/) 
+[Production](https://magma-til.herokuapp.com/) 
 
 ### Install
 Follow these setup steps:
