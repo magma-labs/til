@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   root to: 'posts#index'
 
+  resources :clicks, only: :create
   resource :profile, controller: 'developers', only: %i[update edit]
   resources :developers, path: '/author/', only: 'show', param: :username
 
