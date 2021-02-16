@@ -13,8 +13,9 @@
           %li= link_to "Profile", edit_profile_path
 
     %header
-      = link_to image_tag('logo.png'), "https://magmalabs.io", title: 'MagmaLabs', class: "ml"
-      %h1 TODAY I LEARNED
+      = link_to image_tag('logo.png'), 'https://www.magmalabs.io', title: 'TIL MagmaLabs', class: 'ml'
+      = link_to root_url do
+        %h1 TODAY I LEARNED
 
     = render 'shared/flash'
 
