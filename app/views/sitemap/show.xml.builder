@@ -15,4 +15,10 @@ xml.tag! 'urlset', 'xmlns' => 'http://www.sitemaps.org/schemas/sitemap/0.9', 'xm
       xml.lastmod channel.updated_at.strftime('%Y-%m-%d')
     end
   end
+  @developers.each do |developer|
+    xml.url do
+      xml.loc developer_url(developer.username)
+      xml.lastmod developer.updated_at.strftime('%Y-%m-%d')
+    end
+  end
 end
