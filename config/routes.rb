@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#failure'
 
   root to: 'posts#index'
+  resource :sitemap, controller: 'sitemap', only: [:show]
 
   resources :clicks, only: :create
   resource :profile, controller: 'developers', only: %i[update edit]
@@ -24,4 +25,5 @@ Rails.application.routes.draw do
 
   post '/posts/:slug/like', to: 'posts#like'
   post '/posts/:slug/unlike', to: 'posts#unlike'
+
 end
