@@ -24,7 +24,7 @@ class SchemaBlogpostSerializer < SchemaBaseSerializer
         'image': context.image_url('logo'),
         'inLanguage': 'en-US',
         'copyrightYear': entry.created_at.year,
-        'keywords': %w{#{entry.channel_name} MagmaLabs TIL BlogPost},
+        'keywords': [entry.channel_name, 'MagmaLabs TIL', 'BlogPost', 'Today I Learned'],
         'publisher': 'MagmaLabs'
     }
   end
