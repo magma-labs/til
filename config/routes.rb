@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  default_url_options host: ENV.fetch('host'), protocol: ENV.fetch('protocol')
 
   get '/auth/:provider/callback' => 'sessions#create'
   delete '/signout' => 'sessions#destroy', :as => :signout
