@@ -23,3 +23,7 @@
 - dynamic_path = "more_info/#{@post.channel.name}"
 - if display_more_info?(@post, dynamic_path)
   = render dynamic_path
+
+%script{ type: 'application/ld+json' }
+  = sanitize SchemaBlogpostSerializer.new(self, @post).to_jsonld_data
+
