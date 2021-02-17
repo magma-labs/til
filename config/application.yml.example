@@ -1,19 +1,16 @@
 development: &default
   default_twitter_handle: 'wearemagmalabs'
   production_app_name:
-  google_client_id: ''
-  google_client_secret: ''
-  sender_email: 'SOMETHING@magmalabs.io'
-  host: 'localhost:3000'
-  protocol: 'http://'
-  permitted_domains: 'magmalabs.io'
+  GOOGLE_CLIENT_ID:
+  GOOGLE_CLIENT_SECRET:
+  PERMITTED_DOMAINS: 'magmalabs.io'
   slack_post_endpoint:
   twitter_access_token:
   twitter_access_token_secret:
   twitter_consumer_key:
   twitter_consumer_secret:
   update_twitter_with_post: "false"
-  SENDGRID_API_KEY: ''
+  SENDGRID_API_KEY:
 
 test:
   <<: *default
@@ -21,16 +18,13 @@ test:
 production:
   default_twitter_handle: 'wearemagmalabs'
   production_app_name: 'magma-til'
-  google_client_id: ''
-  google_client_secret: ''
-  sender_email: 'SOMETHING@magmalabs.io'
-  host: 'magma-til.herokuapp.com'
-  protocol: 'https://'
-  permitted_domains: 'magmalabs.io'
+  GOOGLE_CLIENT_ID:
+  GOOGLE_CLIENT_SECRET:
+  PERMITTED_DOMAINS: 'magmalabs.io'
   slack_post_endpoint:
   twitter_access_token:
   twitter_access_token_secret:
   twitter_consumer_key:
   twitter_consumer_secret:
   update_twitter_with_post: "false"
-  SENDGRID_API_KEY: ''
+  SENDGRID_API_KEY:
