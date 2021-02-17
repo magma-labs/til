@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Channel < ApplicationRecord
+  include WithEntries
+
   validates :name, presence: true
   has_many :posts
 

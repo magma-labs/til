@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Developer < ApplicationRecord
+  include WithEntries
+
   has_many :posts, dependent: :destroy
 
   validates :twitter_handle, length: { maximum: 15 },
