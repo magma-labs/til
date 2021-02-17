@@ -11,5 +11,4 @@ class ClicksController < ApplicationController
   def ad
     @ad ||= Ad.find(params[:id])
   end
-
 end
