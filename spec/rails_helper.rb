@@ -7,6 +7,11 @@ require 'rspec/rails'
 
 ActiveRecord::Migration.maintain_test_schema!
 
+OmniAuth.config.test_mode = true
+OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+                                                                 :provider => 'google_oauth2',
+                                                                 info: { email: 'til@magmalabs.io' }
+                                                             })
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
