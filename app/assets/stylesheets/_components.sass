@@ -52,6 +52,7 @@ nav.pagination
   justify-content: center
   +mobile
     display: block
+    margin: 0
     padding: 0 1rem
   &.draft
     opacity: .8
@@ -59,17 +60,17 @@ nav.pagination
     margin-top: 5rem
     flex: 0 1 auto
     box-sizing: border-box
-    width: 60%
-    backdrop-filter: blur(11.5px)
+    max-width: 800px
+    border-radius: 4px
     border: solid 1px rgba(145, 145, 145, 0.5)
-    background-image: linear-gradient(116deg, rgba(36, 36, 36, 0.91) 6%, rgba(43, 43, 43, 0.27) 99%)
+
     +box-outline
     +mobile
-      margin: 0 auto
-      min-width: 80vw
+      margin: 0
+      width: 100%
   .post__content
     overflow: auto
-    padding: 4vw
+    padding: 25px
 
     h1:first-of-type
       margin-bottom: 5px
@@ -82,7 +83,7 @@ nav.pagination
   p.footer
     font-size: 80%
     font-style: italic
-    margin-top: 2em
+    margin: 0
 
   aside
     ul
@@ -132,8 +133,7 @@ nav.pagination
             margin-right: 1rem
             background: svg-url(heart, darken($light, 10%)) center no-repeat
             background-size: contain
-          span.post__like-label
-            display: none
+
           &.liked
             color: $red
             border-color: $red
