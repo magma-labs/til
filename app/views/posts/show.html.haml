@@ -27,3 +27,6 @@
 %script{ type: 'application/ld+json' }
   = sanitize SchemaBlogpostSerializer.new(self, @post).to_jsonld_data
 
+%script{ type: 'application/ld+json' }
+  = sanitize SchemaPostBreadcrumbsSerializer.new(self, @post).to_jsonld_data
+
