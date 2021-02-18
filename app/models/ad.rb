@@ -2,6 +2,6 @@
 
 class Ad < ApplicationRecord
   def self.random
-    order("RANDOM()").first
+    order('RANDOM()').first
   end
 end

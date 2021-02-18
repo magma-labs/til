@@ -35,5 +35,5 @@
 
 - if post.id.to_i.odd? || action_name == 'show'
   - if ad = Ad.random
-    .ad_container
+    .magma_container
       = link_to(image_tag(ad.image_url), clicks_path(id: ad), method: :post)
