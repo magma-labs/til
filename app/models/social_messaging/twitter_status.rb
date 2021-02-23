@@ -33,7 +33,7 @@ module SocialMessaging
     end
 
     def host
-      ENV.fetch('host')
+      ENV.fetch('HOST')
     end
 
     def status
