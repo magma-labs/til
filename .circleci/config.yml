@@ -1,0 +1,50 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.1.1
+
+workflows:
+  til:
+    jobs:
+      - build_and_run
+
+jobs:
+  build_and_run:
+    docker:
+      - image: circleci/ruby:2.7.1-node-browsers
+      - image: circleci/postgres:12-alpine
+        environment: # environment variables for database
+          POSTGRES_USER: postgres
+          POSTGRES_DB: til_test
+          POSTGRES_PASSWORD: pwd
+    environment:
+      DATABASE_URL: postgres://postgres:pwd@127.0.0.1:5432/til_test
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+      RAILS_ENV: test
+    executor: ruby/default
+    steps:
+      - checkout
+      - ruby/install-deps
+      - run:
+          command: sudo apt-get update && sudo apt-get -y install postgresql-client
+      - run:
+          command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
+          name: Wait for DB
+      - run:
+          command: 'bundle exec rails db:structure:load --trace'
+          name: Database setup
+      - run:
+          command: >
+            mkdir -p /tmp/test-results/rspec
+
+            TESTFILES=$(circleci tests glob "spec/**/*_spec.rb" | grep -v /features/ | circleci tests
+            split --split-by=timings)
+
+            bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter
+            --out /tmp/test-results/rspec/results.xml --format progress
+          name: Unit Tests
+      - store_test_results:
+          path: /tmp/test-results/rspec
+      - store_artifacts:
+          destination: test-results
+          path: /tmp/test-results/rspec
