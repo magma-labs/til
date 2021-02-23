@@ -9,7 +9,7 @@ RSpec.describe PostSlack::LikesThresholdSerializer, type: :serializer do
   end
 
   context 'a generic example' do
-    it 'is serialized correctly' do
+    xit 'is serialized correctly' do
       developer = FactoryBot.build(:developer,
                                    username: 'tpope')
       post = FactoryBot.build(:post,
@@ -28,7 +28,7 @@ RSpec.describe PostSlack::LikesThresholdSerializer, type: :serializer do
   end
 
   context 'with a Slack display name' do
-    it 'is serialized with the Slack display name' do
+    xit 'is serialized with the Slack display name' do
       developer = FactoryBot.build(:developer, username: 'tpope', slack_name: 'Tim Pope')
       post = FactoryBot.build(:post,
                               slug: 'sluggishslug',
@@ -46,7 +46,7 @@ RSpec.describe PostSlack::LikesThresholdSerializer, type: :serializer do
   end
 
   context 'with characters that must be escaped in Slack' do
-    it 'is serialized with special Slack characters encoded as HTML entities' do
+    xit 'is serialized with special Slack characters encoded as HTML entities' do
       developer = FactoryBot.build(:developer, username: 'tpope')
       post = FactoryBot.build(:post,
                               slug: 'sluggishslug',
@@ -63,7 +63,7 @@ RSpec.describe PostSlack::LikesThresholdSerializer, type: :serializer do
       expect(serialized).to eql(expected_text)
     end
 
-    it 'is serialized with escaped quotes' do
+    xit 'is serialized with escaped quotes' do
       developer = FactoryBot.build(:developer, username: 'tpope')
       post = FactoryBot.create(:post, title: 'Let me prepare you a "quote"')
 
