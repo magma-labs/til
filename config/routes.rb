@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   get '/auth/:provider/callback' => 'sessions#create'
   delete '/signout' => 'sessions#destroy', :as => :signout
   get '/auth/failure' => 'sessions#failure'
+  resource :session, only: [:create, :destroy]
 
   root to: 'posts#index'
   resource :sitemap, controller: 'sitemap', only: [:show]
@@ -25,5 +25,4 @@ Rails.application.routes.draw do
 
   post '/posts/:slug/like', to: 'posts#like'
   post '/posts/:slug/unlike', to: 'posts#unlike'
-
 end
