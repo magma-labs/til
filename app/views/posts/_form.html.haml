@@ -1,10 +1,10 @@
 .form_container
   = form_for @post do |f|
-    .field
+    .field{spellcheck: "true"}
       = f.label :title
       = f.error_message_on :title
       = f.text_field :title, placeholder: 'Enter title...'
-    .field
+    .field{spellcheck: "true"}
       = f.label :body
       = f.error_message_on :body
       #editor
