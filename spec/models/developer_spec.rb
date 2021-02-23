@@ -9,53 +9,10 @@ describe Developer do
     expect(developer).to be_valid
   end
 
-  it 'requires a username' do
-    developer.username = ''
-    expect(developer).not_to be_valid
-  end
-
-  it 'requires an email' do
-    developer.email = ''
-    expect(developer).not_to be_valid
-  end
-
-  context 'validates email domains' do
-    it 'and allows whitelisted email addresses' do
-      developer.email = 'johnsmith@whitelisted-guest.com'
-      expect(developer).to be_valid
-    end
-
-    it 'and allows whitelisted domains' do
-      developer.email = 'foo@hashrocket.com'
-      expect(developer).to be_valid
-      developer.email = 'foo@hshrckt.com'
-      expect(developer).to be_valid
-    end
-
-    it 'denies an email from a non-whitelisted domain' do
-      developer.email = 'foo@haxor.net'
-      expect(developer).not_to be_valid
-      expect(developer.errors.messages[:email]).to eq ['is invalid']
-    end
-  end
-
   context 'validates usernames' do
-    it 'validates username uniqueness' do
-      FactoryBot.create(:developer, username: developer.username)
-      dup_developer = FactoryBot.build(:developer, username: developer.username)
-      expect(dup_developer).not_to be_valid
-      expect(dup_developer.errors.messages[:username]).to eq ['has already been taken']
-    end
-
     it 'allows alphanumeric usernames' do
       alpha_numeric_developer = FactoryBot.build(:developer, username: 'johnsmith123')
       expect(alpha_numeric_developer).to be_valid
-    end
-
-    it 'denies usernames that contain other characters' do
-      non_alpha_developer = FactoryBot.build(:developer, username: 'john_smith.123')
-      expect(non_alpha_developer).not_to be_valid
-      expect(non_alpha_developer.errors.messages[:username]).to eq ['is invalid']
     end
   end
 
@@ -139,11 +96,6 @@ describe Developer do
   end
 
   context 'editor should be validated' do
-    it 'onlies allow defined editor options' do
-      developer.editor = 'not vim'
-      expect(developer).to be_invalid
-    end
-
     it 'can use defined editor options' do
       developer.editor = described_class.editor_options.sample
       expect(developer).to be_valid
