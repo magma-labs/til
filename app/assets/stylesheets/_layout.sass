@@ -74,6 +74,20 @@ header
   &:hover
     opacity: 1
 
+.site_nav__magma
+  display: inline-block
+  +responsive(width, 6rem, 5rem)
+  +responsive(height, 6rem, 5rem)
+  transition: opacity .2s
+  border: none
+  background: transparent center no-repeat
+  background-size: 60% auto
+  opacity: .7
+  &:hover
+    opacity: 1
+  img
+    width: 100%
+
 .site_nav__toggle
   position: absolute
   left: 100%
