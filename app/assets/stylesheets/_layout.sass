@@ -41,7 +41,6 @@ header
     width: 100vw
     flex
   > ul
-    +clearfix
     +mobile
       background: #fff
       border-top: 2px solid #fff,
@@ -49,10 +48,6 @@ header
       flex-direction: row
       justify-content: space-between
     > li
-      clear: left
-      float: left
-      +mobile
-        clear: none
       &.site_nav--open
         .site_nav__link
           opacity: 1
@@ -62,7 +57,9 @@ header
           box-shadow: 0 0 3rem transparentize($navy, .8)
 
 .site_nav__link
-  display: inline-block
+  display: flex
+  align-items: center
+  justify-content: center
   +responsive(width, 6rem, 5rem)
   +responsive(height, 6rem, 5rem)
   transition: opacity .2s
@@ -75,18 +72,23 @@ header
     opacity: 1
 
 .site_nav__magma
-  display: inline-block
   +responsive(width, 6rem, 5rem)
   +responsive(height, 6rem, 5rem)
   transition: opacity .2s
-  border: none
-  background: transparent center no-repeat
-  background-size: 60% auto
-  opacity: .7
+  opacity: .8
+  margin: auto
   &:hover
     opacity: 1
-  img
+  a
+    height: 100%
     width: 100%
+    display: flex
+    align-items: center
+    justify-content: center
+  img
+    margin: auto
+    height: 60%
+    filter: grayscale(100%)
 
 .site_nav__toggle
   position: absolute
@@ -100,11 +102,6 @@ header
     bottom: 100%
     left: 0
     margin-bottom: 1rem
-.site_nav__login
-  a.site_nav__link
-    background-image: svg-url(login, $accent)
-    +mobile
-      background-image: svg-url(login, $navy)
 
 .site_nav__statistics
   a.site_nav__link
