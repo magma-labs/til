@@ -12,6 +12,10 @@ class Developer < ApplicationRecord
     ['Text Field', 'Ace (w/ Vim)', 'Ace'].freeze
   end
 
+  def to_param
+    username
+  end
+
   validates :editor, inclusion: {
       in: editor_options,
       message: '%<value> is not a valid editor'
