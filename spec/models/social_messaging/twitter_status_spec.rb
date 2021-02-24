@@ -22,7 +22,7 @@ describe SocialMessaging::TwitterStatus do
 
   describe '#status' do
     it 'returns a Twitter status' do
-      host = 'www.magmalabs.io'
+      host = 'til.magmalabs.io'
       expected = "Cool post http://#{host}/posts/1234-cool-post via @handle #til #yodreamhashtag"
       actual = twitter_status.send(:status)
 

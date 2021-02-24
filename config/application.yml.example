@@ -11,7 +11,6 @@ development: &default
   twitter_consumer_secret:
   update_twitter_with_post: "false"
   SENDGRID_API_KEY:
-  HOST: 'www.magmalabs.io'
 
 test:
   <<: *default
