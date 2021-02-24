@@ -6,7 +6,7 @@
     - if logged_in?
       %nav.admin_panel
         %ul
-          %li= link_to current_developer.username, current_developer
+          %li= link_to current_developer.username, developer_path(current_developer.username)
           %li= link_to "Log Out", signout_path, method: :delete
           %li= link_to "Create Post", new_post_path
           %li= link_to "Drafts", drafts_path
