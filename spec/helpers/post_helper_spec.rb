@@ -4,11 +4,11 @@ require 'rails_helper'
 
 describe PostHelper do
   describe '#tweet_link' do
-    context 'returns a link to twitter' do
+    context 'when returns a link to twitter' do
       specify 'with appropriate data' do
         post = FactoryBot.create(:post, slug: '1234')
 
-        expected_result = '<a href="http://twitter.com/share" class="twitter-share-button" data-text="Today I learned: Web Development" data-via="wearemagmalabs" data-hashtags="phantomjs" data-url="http://test.host/posts/1234-web-development">Tweet</a>'
+        expected_result = "<a href=\"http://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Today I learned: Web Development\" data-via=\"wearemagmalabs\" data-hashtags=\"phantomjs\" data-url=\"http://test.host/posts/1234-web-development\">Tweet</a>"
 
         expect(helper.tweet_link(post)).to eq expected_result
       end
