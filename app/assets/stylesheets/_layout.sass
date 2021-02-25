@@ -39,7 +39,6 @@ header
   +mobile
     margin: 0 auto
     width: 100vw
-    flex
   > ul
     +mobile
       background: #fff
@@ -76,7 +75,6 @@ header
   +responsive(height, 6rem, 5rem)
   transition: opacity .2s
   opacity: .8
-  margin: auto
   &:hover
     opacity: 1
   a
@@ -102,6 +100,12 @@ header
     bottom: 100%
     left: 0
     margin-bottom: 1rem
+
+.site_nav__login
+  a.site_nav__link
+    background-image: svg-url(login, $accent)
+    +mobile
+      background-image: svg-url(login, $navy)
 
 .site_nav__statistics
   a.site_nav__link
