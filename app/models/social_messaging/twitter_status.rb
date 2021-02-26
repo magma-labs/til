@@ -11,10 +11,9 @@ module SocialMessaging
     def post_to_twitter
       return if post.draft? || post.tweeted
 
-      return unless ENV['update_twitter_with_post'] == 'true'
+      return if ENV.fetch('SKIP_TWITTER_POSTING', false)
 
-      TwitterClient.update(status)
-      post.tweeted = true
+      TwitterClient.update(tweeted: true)
       post.save
     end
 
@@ -32,9 +31,13 @@ module SocialMessaging
       post.channel.twitter_hashtag
     end
 
+    def host
+      ENV.fetch('HOST', 'til.magmalabs.io')
+    end
+
     def status
       "#{title} #{Rails.application.routes.url_helpers.post_url(titled_slug: post.to_param,
-                                                                host: 'til.magmalabs.io')} via @#{name} #til ##{category}"
+                                                                host: host)} via @#{name} #til ##{category}"
     end
   end
 end

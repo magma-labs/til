@@ -49,8 +49,8 @@ describe SessionsController do
           post :create
           expect(response).to redirect_to root_path
         end.to change(Developer, :count).by(1)
-        developer = Developer.last
-        expect(session[:developer_email]).to eq developer.email
+        developer = Developer.where(email: 'newdev@magmalabs.io')
+        expect(session[:developer_email]).to eq developer.first.email
       end
     end
   end

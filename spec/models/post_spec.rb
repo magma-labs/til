@@ -150,7 +150,7 @@ describe Post do
   describe '#publish' do
     it 'sets the post to published = true' do
       post.publish
-      expect(post.published_at).not_to be_nil
+      expect(post.published_at).to be_present
     end
   end
 
