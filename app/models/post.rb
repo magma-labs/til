@@ -31,7 +31,7 @@ class Post < ApplicationRecord
   end
 
   def twitter_handle
-    developer_twitter_handle || ENV['default_twitter_handle']
+    developer_twitter_handle || ENV.fetch('DEFAULT_TWITTER_HANDLE', 'wearemagmalabs')
   end
 
   def to_param

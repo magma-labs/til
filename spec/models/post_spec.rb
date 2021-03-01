@@ -34,11 +34,6 @@ describe Post do
     expect(post).not_to be_valid
   end
 
-  it 'rejects a title that is more than fifty chars' do
-    post.title = 'a' * 51
-    expect(post).not_to be_valid
-  end
-
   describe '#generate_slug' do
     it 'creates a slug' do
       expect(post.slug).to be
@@ -79,75 +74,6 @@ describe Post do
     it 'ignores and strip emojis' do
       post.title = 'Today I learned about clojure 😀'
       expect(post.send(:slugified_title)).to eq valid_title
-    end
-  end
-
-  describe '#body_size' do
-    it 'returns true when the post is equal or below 200 words' do
-      post.body = 'word ' * 200
-      expect(post).to be_valid
-    end
-
-    it 'returns false when the post is above 200 words' do
-      post.body = 'word ' * 201
-      expect(post).not_to be_valid
-      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
-    end
-
-    it 'behaves like a validation and return an appropriate messsage' do
-      post.body = 'word ' * 200
-      expect(post).to be_valid
-
-      post.body = 'word ' * 201
-      expect(post).not_to be_valid
-      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
-
-      post.body = 'word ' * 300
-      expect(post).not_to be_valid
-      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 100 words over the limit of 200 words']
-
-      post.body = 'word ' * 400
-      expect(post).not_to be_valid
-      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 200 words over the limit of 200 words']
-    end
-  end
-
-  context 'it should count its words' do
-    it 'with trailing spaces' do
-      post = FactoryBot.create(:post, body: 'word ' * 150)
-      expect(post.send(:word_count)).to eq 150
-    end
-
-    it 'with no trailing spaces' do
-      post = FactoryBot.create(:post, body: ('word ' * 150).strip)
-      expect(post.send(:word_count)).to eq 150
-    end
-
-    it 'with one word' do
-      post = FactoryBot.create(:post, body: 'word')
-      expect(post.send(:word_count)).to eq 1
-    end
-  end
-
-  context 'it should know how many words are available' do
-    it 'with trailing spaces' do
-      post = FactoryBot.create(:post, body: 'word ' * 150)
-      expect(post.send(:words_remaining)).to eq 50
-    end
-
-    it 'with no trailing spaces' do
-      post = FactoryBot.create(:post, body: ('word ' * 150).strip)
-      expect(post.send(:words_remaining)).to eq 50
-    end
-
-    it 'with one word' do
-      post = FactoryBot.create(:post, body: 'word')
-      expect(post.send(:words_remaining)).to eq 199
-    end
-
-    it 'with too many words' do
-      post = FactoryBot.build(:post, body: 'word ' * 300)
-      expect(post.send(:words_remaining)).to eq(-100)
     end
   end
 
@@ -224,7 +150,7 @@ describe Post do
   describe '#publish' do
     it 'sets the post to published = true' do
       post.publish
-      expect(post.published_at).to be
+      expect(post.published_at).to be_present
     end
   end
 
