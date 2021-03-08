@@ -1,4 +1,4 @@
-%article.post{ :class => unless post.published? then 'draft' end }
+%article.post{ :class => unless post.published? then 'draft' end, data: { title: post.title, url: post_url(post), path: post_path(post) } }
   %section
     .post__content.copy
       %h1= link_to post.title, post

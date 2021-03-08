@@ -7,3 +7,28 @@
     gtag('js', new Date());
 
     gtag('config', '#{ENV['GOOGLE_ANALYTICS_ID']}');
+
+  :javascript
+    document.addEventListener("DOMContentLoaded", function() {
+      var posts = [].slice.call(document.querySelectorAll("#home .post"));
+
+      if ("IntersectionObserver" in window) {
+        let postObserver = new IntersectionObserver(function(entries, observer) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let post = entry.target;
+              gtag('event', 'page_view', {
+                page_title: post.dataset.title,
+                page_location: post.dataset.url,
+                page_path: post.dataset.path
+              })
+              postObserver.unobserve(post);
+            }
+          });
+        });
+
+        posts.forEach(function(post) {
+          postObserver.observe(post);
+        });
+      }
+    });
