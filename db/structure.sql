@@ -30,7 +30,8 @@ CREATE TABLE public.ads (
     link_url character varying NOT NULL,
     clicks integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    mobile_image_url character varying DEFAULT ''::character varying NOT NULL
 );
 
 
@@ -406,6 +407,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20160708201736'),
 ('20210202151545'),
 ('20210206213709'),
-('20210212181919');
+('20210212181919'),
+('20210224230319');
 
 
