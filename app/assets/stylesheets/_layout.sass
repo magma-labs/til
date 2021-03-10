@@ -7,8 +7,7 @@ body
   background-attachment: fixed
   background-size: cover
   background-position: center
-
-  color: $dark
+  color: $white
   font-family: "Lato", "Helvetica Neue", Helvetica, sans-serif
   font-size: 1.6em
 
@@ -250,10 +249,11 @@ header.page_head
   z-index: 1000
   text-align: center
   p
-    background: #fff
-    border: 5px solid $accent
+    background: $light-bg
+    border: 1px solid $accent
+    backdrop-filter: blur(5px)
     border-top: 0
-    color: $dark
+    color: $white
     padding: 2vw
     +responsive(font-size, 1.4em, 1.2em, 1em)
     cursor: pointer
