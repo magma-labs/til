@@ -25,7 +25,7 @@ $svg-rendering: 'geometricPrecision' !default;
 }
 
 @mixin tablet {
-  @include max-width($site-width-mid) {
+  @include min-width($site-width-narrow) {
     @content;
   }
 }
