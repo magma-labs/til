@@ -13,7 +13,7 @@ if Developer.count.zero?
   puts ' ...done.'
 end
 
-if Channel.count.zero?
+if Post.count.zero?
   print 'Creating posts'
   400.times do
     channel = Channel.all.sample
