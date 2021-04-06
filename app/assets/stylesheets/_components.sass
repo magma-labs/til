@@ -64,6 +64,7 @@ nav.pagination
     width: 70vw
     max-width: 1000px
     border-radius: 4px
+    backdrop-filter: blur(5px)
     +box-outline
     +mobile
       margin: 0
@@ -80,7 +81,7 @@ nav.pagination
         display: block
         transition: color .1s
         &:hover
-          color: $red
+          color: $yellow
   p.footer
     font-size: 80%
     font-style: italic
@@ -151,7 +152,7 @@ ul.post_list
       position: relative
       align-items: center
       padding: .5rem
-      color: $dark
+      color: $light
       font-weight: bold
       z-index: 1
       justify-content: space-between
@@ -175,13 +176,17 @@ ul.post_list
         left: 0
         bottom: 0
         right: 100%
-        background: #fff
+        background: $dark
         transition: right .1s
         z-index: -1
       &:hover:before
         right: 0
 
 form
+  textarea
+    color: #000
+  input
+    color: #000
   .field_with_errors
     display: inline
   .formError
@@ -277,7 +282,7 @@ form
   li + li
     margin-top: .2em
   code
-    background: $light
+    background: $dark
     padding: 0 .4em
     margin: 0 .2em
   pre
@@ -340,7 +345,7 @@ form
       display: block
     .mobile_image
       display: none
-
+      
 .more-info
   margin: 3vw auto
   text-align: center

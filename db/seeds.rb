@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
-Dir[Rails.root.join('db/seeds/common/*.rb')].sort.each do |file|
-  puts "Loading file #{file.split(/\/./).last}"
+# rubocop:disable Rails/Output
+Dir[Rails.root.join('db/seeds/common/*.rb')].each do |file|
+  puts "\n Loading file #{file.split(%r{/}).last}"
   require file
 end
 
 seed_file = Rails.root.join("db/seeds/#{Rails.env}.rb")
 if seed_file.exist?
-  puts "*** Loading #{Rails.env} seed data"
+  puts "\n *** Loading #{Rails.env} seed data"
   require seed_file
 end
+# rubocop:enable Rails/Output
