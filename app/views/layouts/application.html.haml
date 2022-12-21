@@ -25,7 +25,7 @@
     %nav.site_nav
       %ul
         %li.site_nav__magma
-          = link_to image_tag('logo-favicon.png', width: '36', height: '36'), 'https://www.magmalabs.io', title: 'MagmaLabs site', class: 'site_nav__magma'
+          = link_to image_tag('logo-favicon.png', width: '36', height: 'auto'), 'https://www.magmalabs.io', title: 'MagmaLabs site', class: 'site_nav__magma'
         %li.site_nav__login
           - if current_developer
             = link_to 'Log out', signout_path, method: :delete, class: 'site_nav__link'
