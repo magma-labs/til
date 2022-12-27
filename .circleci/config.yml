@@ -26,7 +26,7 @@ jobs:
       - checkout
       - ruby/install-deps
       - run:
-          command: sudo apt-get update && sudo apt-get -y install postgresql-client
+          command: sudo apt-get --allow-releaseinfo-change-suite update && sudo apt-get -y install postgresql-client
       - run:
           command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
           name: Wait for DB
