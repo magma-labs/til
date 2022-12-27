@@ -107,7 +107,7 @@ class PostsController < ApplicationController
   end
 
   def posts_with_developer_and_channel
-    Post.includes(:developer, :channel).page(params[:page]).per(50)
+    Post.includes(:developer, :channel).page(params[:page]).per(15)
   end
 
   def redirect_to_valid_slug
