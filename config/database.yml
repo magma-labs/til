@@ -6,11 +6,18 @@ default: &default
 development:
   <<: *default
   database: til_development
+  username: postgres
+  password: postgres
+  host: db
+  port: 5432
 
 test: &test
   <<: *default
   database: til_test<%=ENV['TEST_ENV_NUMBER']%>
-
+  username: postgres
+  password: postgres
+  host: db
+  port: 5432
 cucumber:
   <<: *test
 
