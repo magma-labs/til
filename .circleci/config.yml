@@ -10,7 +10,7 @@ workflows:
 jobs:
   build_and_run:
     docker:
-      - image: circleci/ruby:2.7.1-node-browsers
+      - image: circleci/ruby:3.1.0-node-browsers
       - image: circleci/postgres:12-alpine
         environment: # environment variables for database
           POSTGRES_USER: postgres
