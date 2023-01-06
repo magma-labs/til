@@ -71,4 +71,6 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.add_footer = true
   end
+
+  Rails.application.routes.default_url_options[:host] = ENV.fetch('HOST_NAME', 'http://localhost:3000')
 end
