@@ -11,6 +11,7 @@ development: &default
   twitter_consumer_secret:
   update_twitter_with_post: "false"
   SENDGRID_API_KEY:
+  HOST_NAME: 'http://localhost:3000'
 
 test:
   <<: *default
@@ -28,3 +29,4 @@ production:
   twitter_consumer_secret:
   update_twitter_with_post: "false"
   SENDGRID_API_KEY:
+  HOST_NAME: 'https://til.magmalabs.io'
