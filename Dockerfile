@@ -12,7 +12,8 @@ COPY Gemfile.lock /myapp/Gemfile.lock
 RUN gem uninstall bundler
 RUN gem install bundler -v  2.2.9
 #RUN bundle install --without development test
-RUN bundle install --without development test
+RUN bundle install --without test
+RUN bundle exec rake assets:precompile
 # Add a script to be executed every time the container starts.
 #COPY entrypoint.sh /usr/bin/
 #RUN chmod +x /usr/bin/entrypoint.sh
