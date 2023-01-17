@@ -1,3 +1,7 @@
+
+%script{ type: 'application/ld+json' }
+  = sanitize SchemaBlogpostSerializer.new(self, post).to_jsonld_data
+
 %article.post{ :class => unless post.published? then 'draft' end, data: { title: post.title, url: post_url(post), path: post_path(post) } }
   %section
     .post__content.copy
