@@ -42,7 +42,8 @@ class SchemaBlogpostSerializer < SchemaBaseSerializer
     {
         'author': {
             '@type': 'Person',
-            'name': entry.developer_username
+            'name': entry.developer_username,
+            'url': context.developer_url(entry.developer)
         }
     }
   end
