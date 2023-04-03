@@ -82,10 +82,14 @@ nav.pagination
         transition: color .1s
         &:hover
           color: $yellow
-  p.footer
-    font-size: 80%
-    font-style: italic
-    margin: 0
+  .footer
+    .details-container
+      display: flex
+      justify-content: space-between
+    .left
+      order: 1
+    .right
+      order: 2
 
   aside
     ul
