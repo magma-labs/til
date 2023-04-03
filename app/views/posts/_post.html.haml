@@ -8,17 +8,21 @@
       %h1= link_to post.title, post
 
       = find_and_preserve markdown_render post.body
-      %p.footer
+      %div.footer
         - if content_for?(:social)
           %p.post__social= content_for :social
-        %p
-        Learned by
-        = link_to post.developer_username, developer_path(post.developer)
-        - unless post.published?
-          (draft)
-        on
-        %span{title: post.created_at}
-          = post.created_at.strftime("%b %-d, %Y")
+        %div.details-container
+          %div.left
+            %p
+              Learned by
+              = link_to post.developer_username, developer_path(post.developer)
+              - unless post.published?
+                (draft)
+              on
+              %span{title: post.created_at}
+                = post.created_at.strftime("%b %-d, %Y")
+          %div.right
+            = link_to "Read our blog", "https://blog.magmalabs.io/?utm_source=til&utm_medium=header&utm_campaign=til"
     %aside
       %ul
         %li
