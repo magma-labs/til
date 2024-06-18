@@ -2,7 +2,7 @@
 %html(lang="en-US")
   = render "layouts/head"
 
-  %body{ class: "lazyload", data: { src: "#{asset_path 'background.png'}", src_mobile: "#{asset_path 'background_mobile.png'}" } }
+  %body
     - if logged_in?
       %nav.admin_panel
         %ul
