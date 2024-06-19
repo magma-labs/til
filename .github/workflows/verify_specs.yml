@@ -1,0 +1,40 @@
+name: Verify Specs
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  specs:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: til_test
+          POSTGRES_PASSWORD: pwd
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run specs
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://til_test:pwd@localhost:5432/til_test
+        run: bin/rails db:setup spec
