@@ -18,7 +18,8 @@ channels = [
     { name: 'testing', twitter_hashtag: 'testing' },
     { name: 'vim', twitter_hashtag: 'vim' },
     { name: 'vue', twitter_hashtag: 'vue' },
-    { name: 'workflow', twitter_hashtag: 'workflow' }
+    { name: 'workflow', twitter_hashtag: 'workflow' },
+    { name: 'ai', twitter_hashtag: 'ai' }
 ]
 
 channels.each do |channel|
