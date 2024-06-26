@@ -8,7 +8,6 @@ gem 'rails', '~> 5.x'
 
 gem 'active_model_serializers'
 gem 'autoprefixer-rails'
-gem 'coffee-rails', '~> 4.1.0'
 gem 'dynamic_form'
 gem 'haml-rails'
 gem 'httparty'
