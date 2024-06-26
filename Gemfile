@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 ruby '3.2.0'
 
-gem 'rails', '~> 5.x'
+gem 'rails', '~> 6.1.7.8'
 
 gem 'active_model_serializers'
 gem 'autoprefixer-rails'
