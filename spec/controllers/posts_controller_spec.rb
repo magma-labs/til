@@ -57,12 +57,10 @@ describe PostsController do
 
       it 'only allows me to update my own posts' do
         expect do
-          patch :update, {
-              params: {
-                  titled_slug: not_my_post.to_param,
-                  post: { title: 'HAXORD' }
-              }
-          }
+          patch :update, params: {
+                titled_slug: not_my_post.to_param,
+                post: { title: 'HAXORD' }
+            }
         end.not_to change { not_my_post.reload.title }
       end
 

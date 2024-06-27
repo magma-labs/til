@@ -192,6 +192,16 @@ describe Post do
         post.save
       end
     end
+
+    describe 'a published post when' do
+      it 'has been changed to unpublished' do
+        post = FactoryBot.create(:post)
+        post.published_at = nil
+
+        expect(post).not_to receive(:notify_slack)
+        post.save
+      end
+    end
   end
 
   describe '#increment_likes' do

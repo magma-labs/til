@@ -5,7 +5,7 @@ RSpec.describe "Sitemaps", type: :request do
     context 'GET /sitemap' do
       it 'returns the xml with all the posts' do
         post = create(:post)
-        get sitemap_path, format: :xml
+        get sitemap_path, params: { format: :xml }
         expect(response.body).to include(post.slug)
       end
     end
