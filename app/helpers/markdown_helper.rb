@@ -19,6 +19,6 @@ module MarkdownHelper
   end
 
   def markdown_render(md)
-    sanitize markdown.render md
+    sanitize find_and_preserve markdown.render md
   end
 end
