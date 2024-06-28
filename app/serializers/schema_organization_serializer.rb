@@ -8,7 +8,7 @@ class SchemaOrganizationSerializer < SchemaBaseSerializer
         '@context': 'http://schema.org',
         '@type': 'Organization',
         'url': context.root_url,
-        'logo': context.image_url('magma-logo')
+        'logo': context.image_url('magma-logo.svg')
     }.merge(same_as).to_json
   end
 

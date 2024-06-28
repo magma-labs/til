@@ -21,7 +21,7 @@ class SchemaBlogpostSerializer < SchemaBaseSerializer
         'datePublished': entry.created_at.strftime('%Y-%m-%d'),
         'dateModified': entry.updated_at.strftime('%Y-%m-%d'),
         'articleBody': entry.body,
-        'image': context.image_url('logo'),
+        'image': context.image_url('logo.png'),
         'inLanguage': 'en-US',
         'copyrightYear': entry.created_at.year,
         'keywords': [entry.channel_name, 'MagmaLabs TIL', 'BlogPost', 'Today I Learned'],
@@ -56,7 +56,7 @@ class SchemaBlogpostSerializer < SchemaBaseSerializer
             'url': 'https://www.magmalabs.io',
             'logo': {
                 '@type': 'ImageObject',
-                'url': context.image_url('magma-logo')
+                'url': context.image_url('magma-logo.svg')
             }
         }
     }

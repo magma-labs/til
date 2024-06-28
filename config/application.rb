@@ -2,7 +2,17 @@
 
 require_relative 'boot'
 
-require 'rails/all'
+%w(
+  active_record/railtie
+  action_controller/railtie
+  action_view/railtie
+  action_mailer/railtie
+).each do |railtie|
+  begin # rubocop:disable Style/RedundantBegin
+    require railtie
+  rescue LoadError
+  end
+end
 
 Bundler.require(*Rails.groups)
 
